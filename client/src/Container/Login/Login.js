@@ -29,7 +29,8 @@ class Login extends React.Component {
         <h1>Welcome</h1>
       
           <input className="email" placeholder="Username" type="text" value={this.state.userName} onChange={this.handleUserName} />
-        
+        <br></br>
+        <br></br>
           <input className="password" placeholder="Password" type="password" value={this.state.password} onChange={this.handlePassword}/>
         
         <button className="btn" onClick={this.handleClick}>Login</button>

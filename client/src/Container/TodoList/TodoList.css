@@ -1,4 +1,24 @@
-.inpt{
-    padding-left: 20px;
-    
+
+.mainTodo input{
+    margin-top: 15px;
+    background-color: rgb(255, 255, 255);
+    border: 0; 
+    color: rgb(36, 35, 35);
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    padding: 0 20px;
+    font-size: 18px;
+    border-radius: 10px;
 }
+
+.mainTodo .btn3{
+    height: 50px;
+    width: 80px;
+    border-radius: 5px;
+    border: 0;
+    background-color:rgb(66, 196, 109); 
+    cursor: pointer;
+    color: rgb(255, 254, 254);
+    font-size: 20px;
+  }

@@ -35,8 +35,9 @@ class Signup extends React.Component {
     return (
       <div className="box">
         <h1>Signup </h1>
-
-        <input
+        
+<div className="inputs">
+        <input 
           placeholder="First name"
           type="text"
           value={this.state.firstName}
@@ -62,6 +63,7 @@ class Signup extends React.Component {
           value={this.state.mobile}
           onChange={this.handleMobile}
         />
+        </div>
         <button className="btn" onClick={this.signupClick}>
           Save
         </button>
