@@ -9,7 +9,7 @@ class Home extends React.Component {
         <div>
           <Link to="login">LOGIN</Link>
         </div>
-<br></br>
+        <br></br>
         <div>
           <Link to="signup">SIGNUP</Link>
         </div>

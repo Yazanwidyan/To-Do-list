@@ -1,9 +1,14 @@
+.main-todo .new__arr {
+    font-size: 25px;
+    color: blanchedalmond;
+    padding: 5px;
+}
 
-.mainTodo input{
+.main-todo input {
     margin-top: 15px;
     background-color: rgb(255, 255, 255);
-    border: 0; 
-    color: rgb(36, 35, 35);
+    border: 0;
+    color: rgb(27, 26, 26);
     width: 200px;
     height: 50px;
     margin: 20px;
@@ -12,25 +17,27 @@
     border-radius: 10px;
 }
 
-.mainTodo .btn3{
+.main-todo .btn3 {
     height: 50px;
     width: 80px;
     border-radius: 5px;
     border: 0;
-    background-color:rgb(66, 196, 109); 
+    background-color: rgb(66, 196, 109);
     cursor: pointer;
     color: rgb(255, 254, 254);
     font-size: 20px;
-  }
-  span{
-      
-      font-size: 50px;
-      color: rgb(245, 243, 240);
-  }
-  .mainTodo .check {
+}
+
+span {
+
+    font-size: 70px;
+    color: rgb(245, 243, 240);
+}
+
+.main-todo .check {
     margin-top: 15px;
     background-color: rgb(255, 255, 255);
-    border: 0; 
+    border: 0;
     color: rgb(36, 35, 35);
     width: 15px;
     height: 10px;
@@ -38,4 +45,8 @@
     padding: 0 20px;
     font-size: 18px;
     border-radius: 10px;
+}
+
+.fa {
+    margin-left: 9px;
 }

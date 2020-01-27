@@ -1,91 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TodoList.css";
 
-class TodoList extends React.Component {
-  state = {
+export default () => {
+  const [state, setState] = useState({
     arr: [],
-    items: "",
-    isInEditMode: false
+    items: {},
+    isInEditMode: false,
+    selectedItem: {},
+    index: "",
+    selectedIndex: "",
+    updatedItems: ""
+  });
+
+  const handleChange = e => {
+    e.persist();
+    setState(prevState => ({ ...prevState, items: e.target.value }));
   };
 
-  handleChange = e => {
-    this.setState({ items: e.target.value });
-  };
-  handleSubmit = () => {
-    const join = this.state.arr;
-    join.push(this.state.items);
-
-    this.setState({ arr: join });
-  };
-
-  /*handleDelete= (index) =>{
-    const postArray = Object.assign([], this.state.arr);
-    postArray.splice(index,1);
-    this.setState({ arr : postArray})
-  }
-
- /* handleDelete = (index) => {
-    const myItems = this.state.arr.filter(item=> {
-      return item.index !== index
-    })
-    this.setState({items : myItems})
-  };*/
-
-  handleDelete = index => {
-    const myItems = this.state.arr;
-    const x = myItems.findIndex(item => item.index === index);
-    myItems.splice(x);
-    this.setState({ arr: myItems });
-  };
-
-  changeEdit = () => {
-    this.setState({
-      isInEditMode: !this.state.isInEditMode
+  const handleSubmit = () => {
+    const join = state.arr;
+    join.push({
+      id: state.arr.length + 1,
+      name: state.items
     });
+
+    setState(prevState => ({ ...prevState, arr: join, items: "" }));
   };
 
-  /*updateText=()=>{
- const newTxt= this.state.arr.map((items) => (
-     {items}))
-     this.setState({ newTxt:newTxt})
+  const handleDelete = item => {
+    const myItems = state.arr.filter(elem => elem.id !== item);
+    setState(prevState => ({ ...prevState, arr: myItems }));
+  };
 
-  
- }
-*/
-  render() {
-    return (
-      <div className="mainTodo">
-        <input
-          placeholder=" Type here"
-          type="text"
-          value={this.state.items}
-          onChange={this.handleChange}
-        />
-        <button className="btn3" type="submit" onClick={this.handleSubmit}>
-          Add
-        </button>
-        {this.state.isInEditMode ? (
-          <div>
-            <button> Save</button>
-            <input type="text" defaultValue={this.state.items} />
-          </div>
-        ) : (
-          <div>
-           
-            <span>Todo List</span>
-            {this.state.arr.map((item, index) => (
-              <div key={index}>
-                {item} 
-                <input className="check" type="checkbox" value="on" />
-                <button onClick={this.handleDelete}>Delete</button>
-                <button onClick={this.changeEdit}>Edit</button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+  const changeEdit = (item, index) => {
+    setState(prevState => ({
+      ...prevState,
+      isInEditMode: !state.isInEditMode,
+      selectedItem: item,
+      selectedIndex: index
+    }));
+  };
 
-export default TodoList;
+  const saveNewItem = () => {
+    const items = state.arr;
+    for (let i in items) {
+      if (i.toString() === state.selectedIndex.toString()) {
+        items[i].name = state.updatedItems;
+        break;
+      }
+    }
+    setState(prevState => ({
+      ...prevState,
+      arr: items,
+      isInEditMode: !state.isInEditMode
+    }));
+  };
+
+  const itemsChange = e => {
+    e.persist();
+    setState(prevState => ({ ...prevState, updatedItems: e.target.value }));
+  };
+
+  return (
+    <div className="main-todo">
+      <input
+        placeholder=" Type here"
+        type="text"
+        value={state.items.name}
+        onChange={handleChange}
+      />
+      <button className="btn3" type="submit" onClick={handleSubmit}>
+        Add
+      </button>
+      {state.isInEditMode ? (
+        <div>
+          <input
+            type="text"
+            defaultValue={state.selectedItem?.name || ""}
+            onChange={itemsChange}
+          />
+          <button className="btn3" onClick={() => saveNewItem()}>
+            Save
+          </button>
+        </div>
+      ) : (
+        <div>
+          <span> Todo List</span>
+          {state.arr.map((item, index) => (
+            <div key={index} className="new__arr">
+              {item.name}
+              <div
+                className="fa fa-trash"
+                onClick={() => handleDelete(item.id)}
+              ></div>
+              <div
+                className="fa fa-pencil"
+                onClick={() => changeEdit(item, index)}
+              ></div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};

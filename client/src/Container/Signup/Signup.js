@@ -1,8 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 class Signup extends React.Component {
-  state = { firstName: "", lastName: "", email: "", mobile: "" };
+  state = { firstName: "",
+            lastName: "",
+            email: "",
+            password: ""
+  };
 
   handleFirstName = event => {
     this.setState({ firstName: event.target.value });
@@ -15,7 +20,7 @@ class Signup extends React.Component {
     this.setState({ email: event.target.value });
   };
   handleMobile = event => {
-    this.setState({ mobile: event.target.value });
+    this.setState({ password: event.target.value });
   };
 
   signupClick = () => {
@@ -23,11 +28,17 @@ class Signup extends React.Component {
       this.state.firstName &&
       this.state.lastName &&
       this.state.email &&
-      this.state.mobile
+      this.state.password
     ) {
-      this.props.history.push("/todolist");
-    } else {
-      console.log("Please enter the blank fields");
+      axios.post("http://localhost:3001/signup", {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      }).then(()=>{
+        // this.props.history.push("/todolist");
+
+      }).catch(()=> console.log('hhhh'));
     }
   };
 
@@ -35,9 +46,8 @@ class Signup extends React.Component {
     return (
       <div className="box">
         <h1>Signup </h1>
-        
-<div className="inputs">
-        <input 
+
+        <input
           placeholder="First name"
           type="text"
           value={this.state.firstName}
@@ -58,12 +68,12 @@ class Signup extends React.Component {
           onChange={this.handleEmail}
         />
         <input
-          placeholder="Mobile"
-          type="text"
-          value={this.state.mobile}
+          placeholder="password"
+          type="password"
+          value={this.state.password}
           onChange={this.handleMobile}
         />
-        </div>
+
         <button className="btn" onClick={this.signupClick}>
           Save
         </button>
